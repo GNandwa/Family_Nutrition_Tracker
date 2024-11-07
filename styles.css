@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fff;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header-left .logo {
+    font-size: 1.5em;
+    color: #006400;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-bar {
+    padding: 5px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    width: 200px;
+}
+
+.auth-btn {
+    background-color: transparent;
+    border: 1px solid #007BFF;
+    color: #007BFF;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.signup-btn {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+main {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 600px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.main-btn {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.login-link {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.login-link a {
+    color: #007BFF;
+    text-decoration: none;
+}
