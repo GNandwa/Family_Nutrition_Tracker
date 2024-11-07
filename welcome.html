@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to NutriTrack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+           background-color: #bd7913;
+           background-image:url('background pic.jpg') ;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0px;
+            }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #3b13bd;
+        }
+        .radio-group {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        label {
+            font-size: 1.1em;
+            color: #333;
+        }
+        .btn {
+            background-color: #100e9a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .btn:hover {
+            background-color: #4312b7;
+            background-image: url("C:\Users\USER\Downloads\background pic.jpg");
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to NutriTrack</h1>
+        <p> Looking for an app that provides families with an accessible and easy to use tool to help monitor,
+        plan and budget family nutrition and dietary intake?? 
+
+        <centre><b>SEARCH NO MORE</b></centre>
+        <br/>
+        Your family food planning and nutrition tracking system NutriTrack is here;</br>
+        NutriTrack is your all-in-one food planning and nutrition tracking companion;tailored to help you achieve your health and wellness goals.
+        Our app offers personalized meal planning, nutrition analysis, and daily tracking tools to ensure you're getting the nutrients you need. 
+        NutriTrack supports you every step of the way.
+        Sign in or sign up to get started and take control of your health today!</p>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="auth" value="signin" checked> Sign In
+            </label>
+            <label>
+                <input type="radio" name="auth" value="signup"> Sign Up
+            </label>
+        </div>
+        <button class="btn" onclick="proceed()">Continue</button>
+    </div>
+
+    <script>
+        function proceed() {
+            const authType = document.querySelector('input[name="auth"]:checked').value;
+            if (authType === 'signin') {
+                window.location.href = 'signin.html';
+            } else {
+                window.location.href = 'signup.html';
+            }
+        }
+    </script>
+</body>
+</html>
