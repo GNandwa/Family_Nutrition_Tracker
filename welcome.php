@@ -91,27 +91,27 @@
         <p>
             Discover a healthier lifestyle with our comprehensive Family Nutrition Tracker and Planner. 
             Designed to empower families, our platform offers a user-friendly interface that simplifies meal planning, 
-            nutritional guidance, and dietary management. Whether you're looking to balance nutrition, manage your budget, 
-            or accommodate dietary restrictions, our system provides tailored meal plans, ingredient lists, and recipes 
-            to meet your family's unique needs.
+            family member preferences, and dietary management. Whether you're looking to balance nutrition, or manage your budget, 
+            our system provides tailored meal plans, shoppign lists, and meals to meet your family's unique needs.
         </p>
         <p>
-            With integrated tools for tracking meal preparation and monitoring dietary compliance, you can take control 
+            With integrated tools for tracking meal recommendations and monitoring dietary compliance, you can take control 
             of your family's nutrition like never before. Join us in fostering healthier eating habits and enhancing 
             family health outcomes, making nutrition planning both accessible and enjoyable!
         </p>
         <button class="button" onclick="showPopup('signupPopup')">Sign Up</button>
         <button class="button" onclick="showPopup('loginPopup')">Log In</button>
     </div>
-        <!-- Sign Up Popup -->
+    
+    <!-- Sign Up Popup -->
     <div class="popup" id="signupPopup">
         <div class="popup-content">
             <h2>Sign Up</h2>
             <p>Please fill in your details to create an account.</p>
-            <form>
-                <input type="text" placeholder="Username" required><br><br>
-                <input type="email" placeholder="Email" required><br><br>
-                <input type="password" placeholder="Password" required><br><br>
+            <form action="signup.php" method="POST">
+                <input type="text" name="username" placeholder="Username" required><br><br>
+                <input type="email" name="email" placeholder="Email" required><br><br>
+                <input type="password" name="password" placeholder="Password" required><br><br>
                 <button type="submit" class="button">Create Account</button>
             </form>
             <button class="close" onclick="closePopup('signupPopup')">Close</button>
@@ -123,9 +123,9 @@
         <div class="popup-content">
             <h2>Log In</h2>
             <p>Please enter your credentials to log in.</p>
-            <form>
-                <input type="text" placeholder="Username" required><br><br>
-                <input type="password" placeholder="Password" required><br><br>
+            <form action="login.php" method="POST">
+                <input type="text" name="username" placeholder="Username" required><br><br>
+                <input type="password" name="password" placeholder="Password" required><br><br>
                 <button type="submit" class="button">Log In</button>
             </form>
             <button class="close" onclick="closePopup('loginPopup')">Close</button>
@@ -139,7 +139,7 @@
     
         function closePopup(popupId) {
             document.getElementById(popupId).style.display = 'none';
-        }
+        }           
     </script>
 
 </body>
