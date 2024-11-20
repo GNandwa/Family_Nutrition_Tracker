@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// Check if the user is logged in
+/* if (!isset($_SESSION['username'])) {
+    header("Location: dashboard.php");
+    exit();
+}*/
+
 include 'config.php';
 include 'session_check.php';
 
@@ -17,11 +23,12 @@ $familyResult = $stmt->get_result(); */
 // Query to fetch family members
 $familyResult = $conn->query("SELECT * FROM family_members");
 
+// Check for errors in the query
 if (!$familyResult) {
     die("Database query failed: " . $conn->error);
 }
 
-// Fetch today's meal
+// Fetch today's random meal
 $mealQuery = "SELECT * FROM meals ORDER BY RAND() LIMIT 1";
 $mealResult = $conn->query($mealQuery);
 $todayMeal = $mealResult->fetch_assoc();
@@ -208,7 +215,7 @@ $historyResult = $conn->query($historyQuery);
         <h2>Today's Meal</h2>
         <?php if ($todayMeal): ?>
             <p><strong><?php echo htmlspecialchars($todayMeal['meal_name']); ?></strong></p>
-            <p><?php echo htmlspecialchars($todayMeal['ingredients']); ?></p>
+            <p><?php echo htmlspecialchars($todayMeal['meal_description']); ?></p>
             <button class="button" onclick="saveMeal(<?php echo $todayMeal['id']; ?>)">Save to History</button>
         <?php else: ?>
             <p>No meal available.</p>
