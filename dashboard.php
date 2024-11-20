@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-// Check if the user is logged in
-/* if (!isset($_SESSION['username'])) {
-    header("Location: dashboard.php");
-    exit();
-}*/
-
 include 'config.php';
 include 'session_check.php';
 
@@ -23,12 +17,11 @@ $familyResult = $stmt->get_result(); */
 // Query to fetch family members
 $familyResult = $conn->query("SELECT * FROM family_members");
 
-// Check for errors in the query
 if (!$familyResult) {
     die("Database query failed: " . $conn->error);
 }
 
-// Fetch today's random meal
+// Fetch today's meal
 $mealQuery = "SELECT * FROM meals ORDER BY RAND() LIMIT 1";
 $mealResult = $conn->query($mealQuery);
 $todayMeal = $mealResult->fetch_assoc();
