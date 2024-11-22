@@ -2,10 +2,10 @@
 session_start();
 
 // Check if the user is logged in
-/* if (!isset($_SESSION['username'])) {
-    header("Location: dashboard.php");
+if (!isset($_SESSION['username'])) {
+    header("Location: welcome.php");
     exit();
-}*/
+}
 
 include 'config.php';
 include 'session_check.php';
@@ -40,6 +40,11 @@ $shoppingResult = $conn->query($shoppingQuery);
 // Fetch meal history
 $historyQuery = "SELECT * FROM meal_history ORDER BY meal_date DESC LIMIT 5";
 $historyResult = $conn->query($historyQuery);
+
+// Check for errors in the query
+if (!$historyResult) {
+    die("Error fetching meal history: " . $conn->error);
+}
 ?>
 
 <!DOCTYPE html>
@@ -263,7 +268,7 @@ $historyResult = $conn->query($historyQuery);
                         echo "<tr>
                                 <td>" . htmlspecialchars($history['meal_name']) . "</td>
                                 <td>" . htmlspecialchars($history['meal_date']) . "</td>
-                              </tr>";
+                            </tr>";
                     }
                 } else {
                     echo "<tr><td colspan='2'>No meal history available.</td></tr>";

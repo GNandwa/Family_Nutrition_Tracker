@@ -155,6 +155,8 @@ $shoppingResult = $conn->query($shoppingQuery);
             <thead>
                 <tr>
                     <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -164,13 +166,15 @@ $shoppingResult = $conn->query($shoppingQuery);
                     while ($item = $shoppingResult->fetch_assoc()) {
                         echo "<tr>
                             <td>{$item['item_name']}</td>
+                            <td>{$item['category']}</td>
+                            <td>{$item['quantity']}</td>
                             <td>
                                 <button class='button' onclick='deleteItem({$item['id']}, this)'>Delete</button>
                             </td>
                         </tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='2'>No items found.</td></tr>";
+                    echo "<tr><td colspan='4'>No items found.</td></tr>";
                 }
                 ?>
             </tbody>
@@ -185,6 +189,13 @@ $shoppingResult = $conn->query($shoppingQuery);
         <h2>Add New Item</h2>
         <form id="addItemForm" method="POST" action="add_item.php">
             <input type="text" name="item_name" placeholder="Item Name" required><br><br>
+            <select name="category" required>
+                <option value="">Select Category</option>
+                <option value="cereals">Cereals</option>
+                <option value="fruits">Fruits</option>
+                <option value="veggies">Veggies</option>
+            </select><br><br>
+            <input type="number" name="quantity" placeholder="Quantity" required min="1"><br><br>
             <button type="submit" class="button">Add Item</button>
         </form>
         <button class="close" onclick="closePopup('addItemPopup')">Close</button>
@@ -208,13 +219,15 @@ $shoppingResult = $conn->query($shoppingQuery);
     document.getElementById('addItemForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const itemName = this.item_name.value;
+        const category = this.category.value;
+        const quantity = this.quantity.value;
 
         fetch('add_item.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: `item_name=${encodeURIComponent(itemName)}`
+            body: `item_name=${encodeURIComponent(itemName)}&category=${encodeURIComponent(category)}&quantity=${encodeURIComponent(quantity)}`
         })
         .then(response => response.json())
         .then(data => {
@@ -223,6 +236,8 @@ $shoppingResult = $conn->query($shoppingQuery);
                 const newRow = tableBody.insertRow();
                 newRow.innerHTML = `
                     <td>${itemName}</td>
+                    <td>${category}</td>
+                    <td>${quantity}</td>
                     <td><button class="button" onclick="deleteItem(${data.id}, this)">Delete</button></td>
                 `;
                 closePopup('addItemPopup');
@@ -241,10 +256,10 @@ $shoppingResult = $conn->query($shoppingQuery);
             fetch(`delete_item.php?id=${itemId}`, { method: 'DELETE' })
                 .then(response => {
                     if (response.ok) {
-                        const row = button.parentNode.parentNode;
+                        const row = button.closest('tr');
                         row.parentNode.removeChild(row);
                     } else {
-                        alert("Failed to delete item.");
+                        alert("Error deleting item.");
                     }
                 })
                 .catch(error => {
