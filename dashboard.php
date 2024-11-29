@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: welcome.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -28,7 +28,7 @@ if (!$familyResult) {
     die("Database query failed: " . $conn->error);
 }
 
-// Fetch today's random meal
+// Fetch today's meal
 $mealQuery = "SELECT * FROM meals ORDER BY RAND() LIMIT 1";
 $mealResult = $conn->query($mealQuery);
 $todayMeal = $mealResult->fetch_assoc();
@@ -225,7 +225,7 @@ if (!$historyResult) {
         <?php else: ?>
             <p>No meal available.</p>
         <?php endif; ?>
-        <button class="button" onclick="getRandomMeal()">Get Meal</button>
+        <button class="button" onclick="getGenerateMeal()">Get Meal</button>
     </div>
 
     <!-- This Week's Shopping List Section -->
@@ -244,7 +244,7 @@ if (!$historyResult) {
                         echo "<tr><td>" . htmlspecialchars($item['item_name']) . "</td></tr>";
                     }
                 } else {
-                    echo "<tr><td>No items in the shopping list.</td></tr>";
+                    echo "<tr><td>No items for shopping.</td></tr>";
                 }
                 ?>
             </tbody>
@@ -301,8 +301,8 @@ if (!$historyResult) {
         window.location.href = 'logout.php'; // Adjust as needed
     }
 
-    function getRandomMeal() {
-        fetch('random_meal.php')
+    function getGenerateMeal() {
+        fetch('generate_meal.php')
             .then(response => response.json())
             .then(data => {
                 if (data.success) {

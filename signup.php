@@ -9,11 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Prepare and bind
     $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $username, $email, $password);
 
-    // Execute the statement
     if ($stmt->execute()) {
         // Set session variable for the username
         $_SESSION['username'] = $username;
